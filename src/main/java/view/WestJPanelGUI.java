@@ -49,7 +49,7 @@ public class WestJPanelGUI extends MainPageGUI {
         menuJPanel.setVisible(false);
         menuJPanel.removeAll();
         menuJPanel.setPreferredSize(menuJPanelDimension);
-        menuJPanel.setBackground(darkBackGround);
+        menuJPanel.setBackground(backGround);
         GridLayout gridLayout = new GridLayout(6,1,0,10);
         menuJPanel.setLayout(gridLayout);
         Dimension buttonDimension = new Dimension(200,45);

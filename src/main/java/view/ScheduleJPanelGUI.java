@@ -1,13 +1,16 @@
 package view;
 
 import controller.ScheduleJPanelController;
+import javafx.geometry.HorizontalDirection;
 import service.ScheduleTableSearchService;
 import service.ScheduleTableService;
 import view.table_models.ArrivalTableModel;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
+import java.util.Date;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -16,23 +19,23 @@ import java.util.Hashtable;
  */
 public class ScheduleJPanelGUI extends EastJPanelGUI {
     public ScheduleJPanelGUI(){
-
-        //this.instScheduleTableSearchService = new ScheduleTableService();
         this.instScheduleTableSearchService = new ScheduleTableSearchService();
     }
 
     protected ScheduleTableSearchService instScheduleTableSearchService;
-    //protected ScheduleTableService instScheduleTableSearchService;
 
     protected final String arrivalsStr = "ARRIVALS";
     protected final String departuresStr = "DEPARTURES";
     private String searchStr = "SEARCH";
     private JSlider jSliderTime;
+    private static boolean isArrivalsScheduleTable = true;
     public static boolean isArrivalsChoosedComboBox = true;
+
+    protected static void setIsArrivalsScheduleTable(boolean isArrivalsScheduleTable) {ScheduleJPanelGUI.isArrivalsScheduleTable = isArrivalsScheduleTable;}
+    protected static boolean isArrivalsScheduleTable() {return isArrivalsScheduleTable;}
 
     @Override
     public void drawJPanel() {
-
         eastJPanel.setVisible(false);
         eastJPanel.removeAll();
         eastJPanel.setBackground(darkBackGround);
@@ -42,12 +45,12 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         eastJPanel.add(middleEastJPanel,BorderLayout.CENTER);
         eastJPanel.add(bottomEastJPanel,BorderLayout.SOUTH);
         drawTopEastJPanel();
+        Date curDate = new Date();
         ArrivalTableModel instArrivalTableModel =
                 new ArrivalTableModel(instScheduleTableSearchService.makeArrivalScheduleTable(jSliderTime.getValue(),
-                        instScheduleTableSearchService.getListAllArrivalFlights()));
+                        instScheduleTableSearchService.getListArrivalFlightsByDate(curDate)));
         drawTable(instArrivalTableModel);
         drawBottomEastJPanel();
-
         eastJPanel.setVisible(true);
     }
 
@@ -85,23 +88,61 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         instEastJPanelController.topButtonsMouseController(searchButton);
         arrivalsButton.setBackground(red);
         topEastJPanel.setVisible(true);
-
     }
 
     protected void drawSouthBoardJPanel(){
         ScheduleJPanelController instScheduleJPanelController = new ScheduleJPanelController();
+        Font font = new Font("Verdana", Font.PLAIN, 10);
         southBoardJPanel.setVisible(false);
         southBoardJPanel.removeAll();
         southBoardJPanel.setPreferredSize(southBoardJPanelDimension);
         southBoardJPanel.setBackground(darkBackGround);
         southBoardJPanel.setLayout(new BorderLayout());
+        JPanel topJPanel = new JPanel();
+        JPanel bottomJPanel = new JPanel();
+        topJPanel.setPreferredSize(new Dimension(850,25));
+        bottomJPanel.setPreferredSize(new Dimension(850,50));
+        topJPanel.setBackground(darkBackGround);
+        bottomJPanel.setBackground(red);
+        southBoardJPanel.add(topJPanel,BorderLayout.NORTH);
+        southBoardJPanel.add(bottomJPanel,BorderLayout.SOUTH);
+        topJPanel.setLayout(new BorderLayout());
+        JLabel timeFrameLabel = new JLabel("TIME FRAME");
+        timeFrameLabel.setPreferredSize(new Dimension(500,15));
+        timeFrameLabel.setFont(new Font("Verdana", Font.BOLD, 10));
+        JLabel dateJLabel = new JLabel("DATE:");
+        dateJLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        dateJLabel.setFont(font);
+        JComboBox dateComboBox;
+        if (isArrivalsScheduleTable) {
+            dateComboBox = new JComboBox(instScheduleTableSearchService.datesForArrivalComboBox());
+        }
+        else {
+            dateComboBox = new JComboBox(instScheduleTableSearchService.datesForDepartComboBox());
+        }
+        dateComboBox.setUI(new BasicComboBoxUI() {
+                @Override
+                protected JButton createArrowButton() {
+                    return new JButton() {
+                        @Override
+                        public int getWidth() {
+                            return 0;
+                        }
+                    };
+                }
+            });
+        ((JLabel)dateComboBox.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
+        dateComboBox.setBackground(darkBackGround);
+        dateComboBox.setFont(font);
+        dateComboBox.setMaximumRowCount(5);
+        dateComboBox.setAutoscrolls(true);
+        dateComboBox.setAlignmentX(SwingConstants.CENTER);
         jSliderTime = new JSlider(0,24,3);
-        jSliderTime.setPreferredSize(new Dimension(850,25));
+        jSliderTime.setPreferredSize(new Dimension(850,45));
         jSliderTime.setMajorTickSpacing(12);
         jSliderTime.setMinorTickSpacing(3);
         jSliderTime.setPaintTicks(true);
         Dictionary<Integer, Component> labelTable = new Hashtable<Integer, Component>();
-        Font font = new Font("Verdana", Font.PLAIN, 10);
         JLabel label24 = new JLabel("24h");
         JLabel label12 = new JLabel("12h");
         JLabel label0 = new JLabel("0h");
@@ -116,9 +157,14 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         jSliderTime.setBackground(darkBackGround);
         jSliderTime.setInverted(true);
         jSliderTime.setValue(24);
-        southBoardJPanel.add(jSliderTime,BorderLayout.WEST);
-        instScheduleJPanelController.jSliderTimeController(jSliderTime);
+        topJPanel.add(timeFrameLabel,BorderLayout.WEST);
+        topJPanel.add(dateJLabel,BorderLayout.CENTER);
+        topJPanel.add(dateComboBox,BorderLayout.EAST);
+        bottomJPanel.add(jSliderTime);
+        instScheduleJPanelController.jSliderTimeController(jSliderTime,dateComboBox);
+        instScheduleJPanelController.datesComboBoxController(dateComboBox,jSliderTime);
         southBoardJPanel.setVisible(true);
+
     }
 
     protected void drawSouthBoardJPanelSearchSchedule(){

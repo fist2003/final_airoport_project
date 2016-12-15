@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.*;
+import java.util.Date;
 
 /**
  * Created by ПК on 09.12.2016.
@@ -19,9 +20,11 @@ public class ScheduleJPanelController extends ScheduleJPanelGUI {
         arrival.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setIsArrivalsScheduleTable(true);
+                Date curDate = new Date();
                 ArrivalTableModel instArrivalTableModel =
                         new ArrivalTableModel(instScheduleTableSearchService.makeArrivalScheduleTable(jSlider.getValue(),
-                                instScheduleTableSearchService.getListAllArrivalFlights()));
+                                instScheduleTableSearchService.getListArrivalFlightsByDate(curDate)));
                 arrival.setBackground(red);
                 depart.setBackground(darkBackGround);
                 search.setBackground(darkBackGround);
@@ -34,9 +37,11 @@ public class ScheduleJPanelController extends ScheduleJPanelGUI {
         depart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setIsArrivalsScheduleTable(false);
+                Date curDate = new Date();
                 DepartureTableModel instDepartureTableModel =
                         new DepartureTableModel(instScheduleTableSearchService.makeDepartureScheduleTable(jSlider.getValue(),
-                                instScheduleTableSearchService.getListAllDepartureFlights()));
+                                instScheduleTableSearchService.getListDepartureFlightsByDate(curDate)));
                 arrival.setBackground(darkBackGround);
                 depart.setBackground(red);
                 search.setBackground(darkBackGround);
@@ -125,20 +130,21 @@ public class ScheduleJPanelController extends ScheduleJPanelGUI {
         });
     }
 
-    public void jSliderTimeController(final JSlider jSlider){
+    public void jSliderTimeController(final JSlider jSlider, final JComboBox comboBox){
         jSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
+                Date choosedDate = instScheduleTableSearchService.convertStringToDate(comboBox.getSelectedItem().toString());
                 if(topButtonFlag){
                     DepartureTableModel instDepartureTableModel =
                             new DepartureTableModel(instScheduleTableSearchService.makeDepartureScheduleTable(jSlider.getValue(),
-                                    instScheduleTableSearchService.getListAllDepartureFlights()));
+                                    instScheduleTableSearchService.getListDepartureFlightsByDate(choosedDate)));
                     drawTable(instDepartureTableModel);
                 }
                 else {
                     ArrivalTableModel instArrivalTableModel =
                             new ArrivalTableModel(instScheduleTableSearchService.makeArrivalScheduleTable(jSlider.getValue(),
-                                    instScheduleTableSearchService.getListAllArrivalFlights()));
+                                    instScheduleTableSearchService.getListArrivalFlightsByDate(choosedDate)));
                     drawTable(instArrivalTableModel);
                 }
             }
@@ -169,7 +175,27 @@ public class ScheduleJPanelController extends ScheduleJPanelGUI {
                 }
             }
         });
+    }
 
+    public void datesComboBoxController(final JComboBox comboBox, final JSlider jSlider){
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date choosedDate = instScheduleTableSearchService.convertStringToDate(comboBox.getSelectedItem().toString());
+                if (isArrivalsScheduleTable()){
+                    ArrivalTableModel instArrivalTableModel =
+                            new ArrivalTableModel(instScheduleTableSearchService.makeArrivalScheduleTable(jSlider.getValue(),
+                                    instScheduleTableSearchService.getListArrivalFlightsByDate(choosedDate)));
+                    drawTable(instArrivalTableModel);
+                }
+                else {
+                    DepartureTableModel instDepartureTableModel =
+                            new DepartureTableModel(instScheduleTableSearchService.makeDepartureScheduleTable(jSlider.getValue(),
+                                    instScheduleTableSearchService.getListDepartureFlightsByDate(choosedDate)));
+                    drawTable(instDepartureTableModel);
+                }
+            }
+        });
     }
 
 

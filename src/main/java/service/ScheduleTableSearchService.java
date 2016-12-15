@@ -4,9 +4,7 @@ import model.Flights;
 import view.ScheduleJPanelGUI;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by ПК on 12.12.2016.
@@ -108,6 +106,14 @@ public class ScheduleTableSearchService extends ScheduleTableService {
         Set<String> set = new HashSet<String>(listDates);
         listDates.clear();
         listDates.addAll(set);
+        Collections.sort(listDates, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                Date dateO1 = convertStringToDate(o1);
+                Date date02 = convertStringToDate(o2);
+                return dateO1.getDate()-date02.getDate();
+            }
+        });
         int size = listDates.size();
         String[] arrDates = new String[size];
         for(int i = 0; i < size; i++){

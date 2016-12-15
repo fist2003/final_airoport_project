@@ -35,35 +35,99 @@ public class PutStartDataService {
 
     private void addFlights(){
         FlightService instFlightService = new FlightService();
-        instFlightService.insertNewService(new Flights(1l,"ODKI0001","ODESSA","KIEV","2016-12-14","2016-12-14","06:00:00","07:30:00",150,250,1l));
-        instFlightService.insertNewService(new Flights(2l,"KIOD0001","KIEV","ODESSA","2016-12-14","2016-12-14","09:30:00","11:00:00",150,250,1l));
-        instFlightService.insertNewService(new Flights(3l,"ODKI0002","ODESSA","KIEV","2016-12-14","2016-12-14","13:00:00","14:30:00",150,250,1l));
-        instFlightService.insertNewService(new Flights(4l,"KIOD0002","KIEV","ODESSA","2016-12-14","2016-12-14","16:30:00","18:00:00",150,250,1l));
+        //2016-12-15
+        String date = "2016-12-15";
+        instFlightService.insertNewService(new Flights(1l,"ODKI0001","ODESSA","KIEV",date,date,"06:00:00","07:30:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(2l,"KIOD0001","KIEV","ODESSA",date,date,"09:30:00","11:00:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(3l,"ODKI0002","ODESSA","KIEV",date,date,"13:00:00","14:30:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(4l,"KIOD0002","KIEV","ODESSA",date,date,"16:30:00","18:00:00",150,250,1l));
 
-        instFlightService.insertNewService(new Flights(5l,"ODLV0001","ODESSA","LVIV","2016-12-14","2016-12-14","07:00:00","08:30:00",150,250,2l));
-        instFlightService.insertNewService(new Flights(6l,"LVOD0001","LVIV","ODESSA","2016-12-14","2016-12-14","10:30:00","12:00:00",150,250,2l));
-        instFlightService.insertNewService(new Flights(7l,"ODLV0002","ODESSA","LVIV","2016-12-14","2016-12-14","14:00:00","15:30:00",150,250,2l));
-        instFlightService.insertNewService(new Flights(8l,"LVOD0002","LVIV","ODESSA","2016-12-14","2016-12-14","17:30:00","19:00:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(5l,"ODLV0001","ODESSA","LVIV",date,date,"07:00:00","08:30:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(6l,"LVOD0001","LVIV","ODESSA",date,date,"10:30:00","12:00:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(7l,"ODLV0002","ODESSA","LVIV",date,date,"14:00:00","15:30:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(8l,"LVOD0002","LVIV","ODESSA",date,date,"17:30:00","19:00:00",150,250,2l));
 
-        instFlightService.insertNewService(new Flights(9l,"ODMI0001","ODESSA","MINSK","2016-12-14","2016-12-14","05:00:00","07:00:00",200,300,3l));
-        instFlightService.insertNewService(new Flights(10l,"MIOD0001","MINSK","ODESSA","2016-12-14","2016-12-14","09:00:00","11:00:00",200,300,3l));
-        instFlightService.insertNewService(new Flights(11l,"ODMI0002","ODESSA","MINSK","2016-12-14","2016-12-14","13:00:00","15:00:00",200,300,3l));
-        instFlightService.insertNewService(new Flights(12l,"MIOD0002","MINSK","ODESSA","2016-12-14","2016-12-14","17:00:00","19:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(9l,"ODMI0001","ODESSA","MINSK",date,date,"05:00:00","07:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(10l,"MIOD0001","MINSK","ODESSA",date,date,"09:00:00","11:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(11l,"ODMI0002","ODESSA","MINSK",date,date,"13:00:00","15:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(12l,"MIOD0002","MINSK","ODESSA",date,date,"17:00:00","19:00:00",200,300,3l));
 
-        instFlightService.insertNewService(new Flights(13l,"ODTB0001","ODESSA","TBILICI","2016-12-14","2016-12-14","05:30:00","07:30:00",200,300,4l));
-        instFlightService.insertNewService(new Flights(14l,"TBOD0001","TBILICI","ODESSA","2016-12-14","2016-12-14","09:30:00","11:30:00",200,300,4l));
-        instFlightService.insertNewService(new Flights(15l,"ODTB0002","ODESSA","TBILICI","2016-12-14","2016-12-14","13:30:00","15:30:00",200,300,4l));
-        instFlightService.insertNewService(new Flights(16l,"TBOD0002","TBILICI","ODESSA","2016-12-14","2016-12-14","17:30:00","19:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(13l,"ODTB0001","ODESSA","TBILICI",date,date,"05:30:00","07:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(14l,"TBOD0001","TBILICI","ODESSA",date,date,"09:30:00","11:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(15l,"ODTB0002","ODESSA","TBILICI",date,date,"13:30:00","15:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(16l,"TBOD0002","TBILICI","ODESSA",date,date,"17:30:00","19:30:00",200,300,4l));
 
-        instFlightService.insertNewService(new Flights(17l,"STOD0001","STAMBUL","ODESSA","2016-12-14","2016-12-14","04:30:00","06:30:00",250,350,5l));
-        instFlightService.insertNewService(new Flights(18l,"ODST0001","ODESSA","STAMBUL","2016-12-14","2016-12-14","08:30:00","10:30:00",250,350,5l));
-        instFlightService.insertNewService(new Flights(19l,"STOD0002","STAMBUL","ODESSA","2016-12-14","2016-12-14","12:30:00","14:30:00",250,350,5l));
-        instFlightService.insertNewService(new Flights(20l,"ODST0002","ODESSA","STAMBUL","2016-12-14","2016-12-14","16:30:00","18:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(17l,"STOD0001","STAMBUL","ODESSA",date,date,"04:30:00","06:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(18l,"ODST0001","ODESSA","STAMBUL",date,date,"08:30:00","10:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(19l,"STOD0002","STAMBUL","ODESSA",date,date,"12:30:00","14:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(20l,"ODST0002","ODESSA","STAMBUL",date,date,"16:30:00","18:30:00",250,350,5l));
 
-        instFlightService.insertNewService(new Flights(17l,"KAOD0001","KAIR","ODESSA","2016-12-14","2016-12-14","07:30:00","09:30:00",250,350,6l));
-        instFlightService.insertNewService(new Flights(18l,"ODKA0001","ODESSA","KAIR","2016-12-14","2016-12-14","10:30:00","12:30:00",250,350,6l));
-        instFlightService.insertNewService(new Flights(19l,"KAOD0002","KAIR","ODESSA","2016-12-14","2016-12-14","14:30:00","16:30:00",250,350,6l));
-        instFlightService.insertNewService(new Flights(20l,"ODKA0002","ODESSA","KAIR","2016-12-14","2016-12-14","18:30:00","20:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(17l,"KAOD0001","KAIR","ODESSA",date,date,"07:30:00","09:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(18l,"ODKA0001","ODESSA","KAIR",date,date,"10:30:00","12:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(19l,"KAOD0002","KAIR","ODESSA",date,date,"14:30:00","16:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(20l,"ODKA0002","ODESSA","KAIR",date,date,"18:30:00","20:30:00",250,350,6l));
+//2016-12-15
+        date = "2016-12-16";
+        instFlightService.insertNewService(new Flights(1l,"ODKI0011","ODESSA","KIEV",date,date,"06:00:00","07:30:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(2l,"KIOD0011","KIEV","ODESSA",date,date,"09:30:00","11:00:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(3l,"ODKI0012","ODESSA","KIEV",date,date,"13:00:00","14:30:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(4l,"KIOD0012","KIEV","ODESSA",date,date,"16:30:00","18:00:00",150,250,1l));
+
+        instFlightService.insertNewService(new Flights(5l,"ODLV0011","ODESSA","LVIV",date,date,"07:00:00","08:30:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(6l,"LVOD0011","LVIV","ODESSA",date,date,"10:30:00","12:00:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(7l,"ODLV0012","ODESSA","LVIV",date,date,"14:00:00","15:30:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(8l,"LVOD0012","LVIV","ODESSA",date,date,"17:30:00","19:00:00",150,250,2l));
+
+        instFlightService.insertNewService(new Flights(9l,"ODMI0011","ODESSA","MINSK",date,date,"05:00:00","07:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(10l,"MIOD0011","MINSK","ODESSA",date,date,"09:00:00","11:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(11l,"ODMI0012","ODESSA","MINSK",date,date,"13:00:00","15:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(12l,"MIOD0012","MINSK","ODESSA",date,date,"17:00:00","19:00:00",200,300,3l));
+
+        instFlightService.insertNewService(new Flights(13l,"ODTB0011","ODESSA","TBILICI",date,date,"05:30:00","07:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(14l,"TBOD0011","TBILICI","ODESSA",date,date,"09:30:00","11:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(15l,"ODTB0012","ODESSA","TBILICI",date,date,"13:30:00","15:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(16l,"TBOD0012","TBILICI","ODESSA",date,date,"17:30:00","19:30:00",200,300,4l));
+
+        instFlightService.insertNewService(new Flights(17l,"STOD0011","STAMBUL","ODESSA",date,date,"04:30:00","06:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(18l,"ODST0011","ODESSA","STAMBUL",date,date,"08:30:00","10:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(19l,"STOD0012","STAMBUL","ODESSA",date,date,"12:30:00","14:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(20l,"ODST0012","ODESSA","STAMBUL",date,date,"16:30:00","18:30:00",250,350,5l));
+
+        instFlightService.insertNewService(new Flights(17l,"KAOD0011","KAIR","ODESSA",date,date,"07:30:00","09:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(18l,"ODKA0011","ODESSA","KAIR",date,date,"10:30:00","12:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(19l,"KAOD0012","KAIR","ODESSA",date,date,"14:30:00","16:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(20l,"ODKA0012","ODESSA","KAIR",date,date,"18:30:00","20:30:00",250,350,6l));
+        //2016-12-17
+        date = "2016-12-17";
+        instFlightService.insertNewService(new Flights(1l,"ODKI0021","ODESSA","KIEV",date,date,"06:00:00","07:30:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(2l,"KIOD0021","KIEV","ODESSA",date,date,"09:30:00","11:00:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(3l,"ODKI0022","ODESSA","KIEV",date,date,"13:00:00","14:30:00",150,250,1l));
+        instFlightService.insertNewService(new Flights(4l,"KIOD0022","KIEV","ODESSA",date,date,"16:30:00","18:00:00",150,250,1l));
+
+        instFlightService.insertNewService(new Flights(5l,"ODLV0021","ODESSA","LVIV",date,date,"07:00:00","08:30:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(6l,"LVOD0021","LVIV","ODESSA",date,date,"10:30:00","12:00:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(7l,"ODLV0022","ODESSA","LVIV",date,date,"14:00:00","15:30:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(8l,"LVOD0022","LVIV","ODESSA",date,date,"17:30:00","19:00:00",150,250,2l));
+
+        instFlightService.insertNewService(new Flights(9l,"ODMI0021","ODESSA","MINSK",date,date,"05:00:00","07:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(10l,"MIOD0021","MINSK","ODESSA",date,date,"09:00:00","11:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(11l,"ODMI0022","ODESSA","MINSK",date,date,"13:00:00","15:00:00",200,300,3l));
+        instFlightService.insertNewService(new Flights(12l,"MIOD0022","MINSK","ODESSA",date,date,"17:00:00","19:00:00",200,300,3l));
+
+        instFlightService.insertNewService(new Flights(13l,"ODTB0021","ODESSA","TBILICI",date,date,"05:30:00","07:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(14l,"TBOD0021","TBILICI","ODESSA",date,date,"09:30:00","11:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(15l,"ODTB0022","ODESSA","TBILICI",date,date,"13:30:00","15:30:00",200,300,4l));
+        instFlightService.insertNewService(new Flights(16l,"TBOD0022","TBILICI","ODESSA",date,date,"17:30:00","19:30:00",200,300,4l));
+
+        instFlightService.insertNewService(new Flights(17l,"STOD0021","STAMBUL","ODESSA",date,date,"04:30:00","06:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(18l,"ODST0021","ODESSA","STAMBUL",date,date,"08:30:00","10:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(19l,"STOD0022","STAMBUL","ODESSA",date,date,"12:30:00","14:30:00",250,350,5l));
+        instFlightService.insertNewService(new Flights(20l,"ODST0022","ODESSA","STAMBUL",date,date,"16:30:00","18:30:00",250,350,5l));
+
+        instFlightService.insertNewService(new Flights(17l,"KAOD0021","KAIR","ODESSA",date,date,"07:30:00","09:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(18l,"ODKA0021","ODESSA","KAIR",date,date,"10:30:00","12:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(19l,"KAOD0022","KAIR","ODESSA",date,date,"14:30:00","16:30:00",250,350,6l));
+        instFlightService.insertNewService(new Flights(20l,"ODKA0022","ODESSA","KAIR",date,date,"18:30:00","20:30:00",250,350,6l));
     }
 
     public void addPassengers(){

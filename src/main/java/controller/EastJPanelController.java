@@ -1,6 +1,5 @@
 package controller;
 
-import view.EastJPanelGUI;
 import view.GUIInterface;
 
 import javax.swing.*;
