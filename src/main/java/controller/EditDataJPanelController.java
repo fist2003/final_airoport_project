@@ -5,6 +5,7 @@ import view.EditInfoJPanelGUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by ПК on 13.12.2016.
@@ -107,6 +108,19 @@ public class EditDataJPanelController extends EditInfoJPanelGUI {
                 JOptionPane.YES_NO_OPTION);
         if (n == 0){return true;}
         else return false;
+    }
+
+    protected void messageSuccessful(){
+        JOptionPane.showMessageDialog(jfrm,"Entered value is correct!");
+    }
+
+    protected void messageWrongInputData(ArrayList<String> listAirplanesNames){
+        String eror = "You entered wrong data: ";
+        for(String value : listAirplanesNames) {
+            eror = eror + value + ", ";
+        }
+        eror = eror + ". Please try input correct values";
+        JOptionPane.showMessageDialog(jfrm,eror);
     }
 
 

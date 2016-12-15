@@ -18,7 +18,7 @@ public interface GUIInterface {
     Dimension jfrmStartDimension = new Dimension(300,100);
 
     JPanel mainJPanel = new JPanel();
-    Dimension mainJPanelDimension = new Dimension(jfrmDimension);
+    Dimension mainJPanelDimension = new Dimension(1000,450);
 
     JPanel westJPanel = new JPanel();
     Dimension westJPanelDimension = new Dimension(200,450);

@@ -27,6 +27,13 @@ public class PassengersDAO extends ConnectToMySQLDAO implements DAOInterface<Pas
     private String querryAllPassAndFlightInfo = "Select p.*,f.number,f.departPort,f.destinationPort,a.name,f.priceEconom,f.priceBusiness " +
             "from passengers p join flights f on p.flight_id = f.id join airplanes on f.airplane_id = airplanes.id " +
             "join airlines a on airplanes.airline_id = a.id order by f.number;";
+    private String querryCheckEconomFreePlaces = "Select distinct count(airplanes.numberISO),airplanes.economPlaces " +
+            "from passengers join flights on passengers.flight_id = flights.id join airplanes on " +
+            "flights.airplane_id = airplanes.id where passengers.flight_id = ? and passengers.classTicket = 'econom';";
+    private String querryCheckBusinessFreePlaces = "Select distinct count(airplanes.numberISO),airplanes.businessPlaces " +
+            "from passengers join flights on passengers.flight_id = flights.id join airplanes on " +
+            "flights.airplane_id = airplanes.id where passengers.flight_id = ? and passengers.classTicket = 'business';";
+   // private String querryCheckPassportInFlight = "Select count(passport) from passengers where flight_id = ?  and passport = ? and classTicket = ?;";
 
     @Override
     public boolean insertNewDAO(Passengers passenger) {
@@ -180,4 +187,47 @@ public class PassengersDAO extends ConnectToMySQLDAO implements DAOInterface<Pas
         }
         return list;
     }
+
+    public int checkFreePlaceInFlightDAO(Passengers passenger){
+        int countBusyPlaces = 0;
+        int placesTotal = 0;
+        String querry = null;
+        if(passenger.getClassTicket().toLowerCase().equals("econom")) {
+            querry = querryCheckEconomFreePlaces;
+        }
+        else if(passenger.getClassTicket().toLowerCase().equals("business")){
+            querry = querryCheckBusinessFreePlaces;
+        }
+        else{return -1;}
+        try {PreparedStatement ps = getConnection().prepareStatement(querry);
+            ps.setLong(1,passenger.getFlight_id());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                countBusyPlaces = rs.getInt(1);
+                placesTotal = rs.getInt(2);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return placesTotal - countBusyPlaces;
+    }
+/*
+    public int checkPassportInFlightDAO(Passengers passenger){
+        int count = 0;
+        try {PreparedStatement ps = getConnection().prepareStatement(querryCheckPassportInFlight);
+            ps.setLong(1,passenger.getFlight_id());
+            ps.setString(2,passenger.getPassportNumber());
+            ps.setString(3,passenger.getClassTicket());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+*/
 }

@@ -62,10 +62,12 @@ public class EditUserController extends EditDataJPanelController {
     }
 
     private Users addUserObject(JTable table){
-        int row = table.getSelectedRow();
+        int row = 0;
         Long id;
         if(isInsertPresed){id = 0l;}
-        else {id = (Long) table.getValueAt(row, 0);}
+        else {
+            row = table.getSelectedRow();
+            id = (Long) table.getValueAt(row, 0);}
         Users user = new Users();
         user.setId(id);
         user.setLogin(table.getValueAt(row,1).toString());

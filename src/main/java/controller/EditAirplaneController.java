@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Created by ПК on 14.12.2016.
@@ -36,7 +37,10 @@ public class EditAirplaneController extends EditDataJPanelController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Airplanes airplane = addAirplaneObject(table);
-                instAirplaneService.insertNewService(airplane);
+                ArrayList<String> check = new ArrayList<String>(instAirplaneService.insertNewService(airplane));
+                if(check.size() == 0){messageSuccessful();}
+                else {
+                    messageWrongInputData(check);}
                 EditAirplaneTableModel instEditAirplaneTableModel = new EditAirplaneTableModel(instAirplaneService.getAllService());
                 editTableController(drawTable(instEditAirplaneTableModel));
             }
@@ -50,10 +54,16 @@ public class EditAirplaneController extends EditDataJPanelController {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     Airplanes airplane = addAirplaneObject(table);
                     if (isEditPresed) {
-                        instAirplaneService.editDataService(airplane);
+                        ArrayList<String> check = new ArrayList<String>(instAirplaneService.editDataService(airplane));
+                        if(check.size() == 0){messageSuccessful();}
+                        else {
+                            messageWrongInputData(check);}
                     }
                     else if (isDeletePresed) {
-                        if (messageForDelete("Airplane")) {instAirplaneService.deleteDataService(airplane);}
+                        if (messageForDelete("Airplane")) {
+                            ArrayList<Long> listFlightsId = new ArrayList<Long>(instAirplaneService.deleteDataService(airplane));
+                            if (listFlightsId.size() != 0) {messageOfRegisteredFlightsInAirplane(listFlightsId);}
+                        }
                     }
                     EditAirplaneTableModel instEditAirplaneTableModel = new EditAirplaneTableModel(instAirplaneService.getAllService());
                     editTableController(drawTable(instEditAirplaneTableModel));
@@ -62,19 +72,34 @@ public class EditAirplaneController extends EditDataJPanelController {
     }
 
     private Airplanes addAirplaneObject(JTable table){
-        int row = table.getSelectedRow();
+        int row = 0;
         Long id;
-        if(isInsertPresed){id = 0l;}
-        else {id = (Long) table.getValueAt(row, 0);}
+        if(isInsertPresed){id = null;}
+        else {
+            row = table.getSelectedRow();
+            id = (Long) table.getValueAt(row, 0);}
         Airplanes airplane = new Airplanes();
         airplane.setId(id);
         airplane.setManufacturer(table.getValueAt(row,1).toString());
         airplane.setModel(table.getValueAt(row,2).toString());
         airplane.setNumberISO(table.getValueAt(row,3).toString());
-        airplane.setYear(table.getValueAt(row,4).toString());
-        airplane.setPlacesEconom(Integer.parseInt(table.getValueAt(row,5).toString()));
-        airplane.setPlacesBusiness(Integer.parseInt(table.getValueAt(row,6).toString()));
-        airplane.setAirline_id(Long.parseLong(table.getValueAt(row,7).toString()));
+        if(instAirplaneService.checkInputNumber(table.getValueAt(row,4).toString())){airplane.setYear(table.getValueAt(row,4).toString());}
+        else airplane.setYear("-1");
+        if (instAirplaneService.checkInputNumber(table.getValueAt(row,5).toString())) {airplane.setPlacesEconom(Integer.parseInt(table.getValueAt(row,5).toString()));}
+        else airplane.setPlacesEconom(-1);
+        if(instAirplaneService.checkInputNumber(table.getValueAt(row,6).toString())){airplane.setPlacesBusiness(Integer.parseInt(table.getValueAt(row,6).toString()));}
+        else airplane.setPlacesBusiness(-1);
+        if(instAirplaneService.checkInputNumber(table.getValueAt(row,7).toString())){airplane.setAirline_id(Long.parseLong(table.getValueAt(row,7).toString()));}
+        else airplane.setAirline_id(-1l);
         return airplane;
+    }
+
+    private void messageOfRegisteredFlightsInAirplane(ArrayList<Long> listFlightsId){
+        String eror = "You cann`t delete this airplane. Flight(s) with id: ";
+        for(Long flightId : listFlightsId) {
+            eror = eror + flightId + ", ";
+        }
+        eror = eror + "are registered in it;";
+        JOptionPane.showMessageDialog(jfrm,eror);
     }
 }

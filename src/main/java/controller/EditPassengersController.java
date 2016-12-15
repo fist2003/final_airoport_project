@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Created by ПК on 14.12.2016.
@@ -36,7 +37,9 @@ public class EditPassengersController extends EditDataJPanelController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Passengers passengers = addPassengerObject(table);
-                instPassengersService.insertNewService(passengers);
+                ArrayList<String> check = new ArrayList<String>(instPassengersService.insertNewService(passengers));
+                if(check.size() == 0){messageSuccessful();}
+                else {messageWrongInputData(check);}
                 EditPassengerTableModel instEditPassengerTableModel = new EditPassengerTableModel(instPassengersService.getAllService());
                 editTableController(drawTable(instEditPassengerTableModel));
             }
@@ -50,7 +53,9 @@ public class EditPassengersController extends EditDataJPanelController {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     Passengers passenger = addPassengerObject(table);
                     if (isEditPresed) {
-                        instPassengersService.editDataService(passenger);
+                        ArrayList<String> check = new ArrayList<String>(instPassengersService.editDataService(passenger));
+                        if(check.size() == 0){messageSuccessful();}
+                        else {messageWrongInputData(check);}
                     }
                     else if (isDeletePresed) {
                         if (messageForDelete("Passenger")) {instPassengersService.deleteDataService(passenger);}
@@ -62,10 +67,12 @@ public class EditPassengersController extends EditDataJPanelController {
     }
 
     private Passengers addPassengerObject(JTable table){
-        int row = table.getSelectedRow();
+        int row = 0;
         Long id;
-        if(isInsertPresed){id = 0l;}
-        else {id = (Long) table.getValueAt(row, 0);}
+        if(isInsertPresed){id = null;}
+        else {
+            row = table.getSelectedRow();
+            id = (Long) table.getValueAt(row, 0);}
         Passengers passenger = new Passengers();
         passenger.setId(id);
         passenger.setLastName(table.getValueAt(row,1).toString());
@@ -75,7 +82,8 @@ public class EditPassengersController extends EditDataJPanelController {
         passenger.setBirtday(table.getValueAt(row,5).toString());
         passenger.setCountry(table.getValueAt(row,6).toString());
         passenger.setClassTicket(table.getValueAt(row,7).toString());
-        passenger.setFlight_id(Long.parseLong(table.getValueAt(row,8).toString()));
+        if(instPassengersService.checkInputNumber(table.getValueAt(row,8).toString())){passenger.setFlight_id(Long.parseLong(table.getValueAt(row,8).toString()));}
+        else passenger.setFlight_id(-1l);
         return passenger;
     }
 }

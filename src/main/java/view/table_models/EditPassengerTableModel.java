@@ -74,7 +74,7 @@ public class EditPassengerTableModel extends AbstractTableModel {
     }
 
     public boolean isCellEditable(int row, int column) {
-        if((EditInfoJPanelGUI.isEditPresed)||(EditInfoJPanelGUI.isDeletePresed))return true;
+        if(EditInfoJPanelGUI.isEditPresed)return true;
         else return false;
     }
 

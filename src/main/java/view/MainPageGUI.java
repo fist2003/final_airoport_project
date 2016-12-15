@@ -16,7 +16,7 @@ public class MainPageGUI implements GUIInterface {
         EastJPanelGUI instEastJPanelGUI = new EastJPanelGUI();
         jfrm.setSize(jfrmDimension);
         jfrm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jfrm.add(mainJPanel);
+
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{210, 660};
         gridBagLayout.rowHeights = new int[]{460};
@@ -24,9 +24,12 @@ public class MainPageGUI implements GUIInterface {
         mainJPanel.setVisible(true);
         mainJPanel.setLayout(gridBagLayout);
         mainJPanel.setBackground(backGround);
-        mainJPanel.setPreferredSize(jfrmDimension);
+        mainJPanel.setSize(jfrmDimension);
         mainJPanel.add(westJPanel);
         mainJPanel.add(eastJPanel);
+        JScrollPane srl = new JScrollPane(mainJPanel);
+        srl.setAutoscrolls(true);
+        jfrm.add(srl);
         instWestJPanelGUI.drawJPanel();
         instEastJPanelGUI.drawJPanel();
         jfrm.setVisible(true);
