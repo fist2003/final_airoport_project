@@ -40,8 +40,6 @@ public class AirlinesDAO extends ConnectToMySQLDAO implements DAOInterface<Airli
             ps.setString(4,airline.getWebsite());
             ps.setLong(5,airline.getId());
             ps.executeUpdate();
-            System.out.println("in dao");
-            System.out.println(airline.getAdress());
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

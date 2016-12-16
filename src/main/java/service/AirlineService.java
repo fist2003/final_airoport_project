@@ -51,7 +51,6 @@ public class AirlineService extends CheckInputValueService {
 
     public ArrayList<String> editAirlineService(Airlines airlines){
         ArrayList<String> check = new ArrayList<String>(checkInputValues(airlines));
-        System.out.println(check.size());
         if (check.size() == 0){instAirlinesDAO.editInDBDAO(airlines);}
         return check;
     }

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Created by ПК on 14.12.2016.
@@ -36,7 +37,9 @@ public class EditUserController extends EditDataJPanelController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Users user = addUserObject(table);
-                instUsersService.insertNewService(user);
+                ArrayList<String> check = new ArrayList<String>(instUsersService.insertNewService(user));
+                if(check.size() == 0){messageSuccessful();}
+                else {messageWrongInputData(check);}
                 EditUsersTableModel instEditUsersTableModel = new EditUsersTableModel(instUsersService.getAllService());
                 editTableController(drawTable(instEditUsersTableModel));
             }
@@ -50,10 +53,16 @@ public class EditUserController extends EditDataJPanelController {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     Users user = addUserObject(table);
                     if (isEditPresed) {
-                        instUsersService.editDataService(user);
+                        ArrayList<String> check = new ArrayList<String>(instUsersService.editDataService(user));
+                        if(check.size() == 0){messageSuccessful();}
+                        else {
+                            messageWrongInputData(check);}
                     }
                     else if (isDeletePresed) {
-                        if (messageForDelete("User")) {instUsersService.deleteDataService(user);}
+                        if (messageForDelete("User")) {
+                            ArrayList<Long> listFlightsId = new ArrayList<Long>(instUsersService.deleteDataService(user));
+                            if (listFlightsId.size() != 0) {messageForUserDelete();}
+                        }
                     }
                     EditUsersTableModel instEditUsersTableModel = new EditUsersTableModel(instUsersService.getAllService());
                     editTableController(drawTable(instEditUsersTableModel));
@@ -76,8 +85,14 @@ public class EditUserController extends EditDataJPanelController {
         user.setLastName(table.getValueAt(row,4).toString());
         user.setFirstName(table.getValueAt(row,5).toString());
         user.setSex(table.getValueAt(row,6).toString());
-        user.setIsAdmin(Integer.parseInt(table.getValueAt(row,7).toString()));
+        if(instUsersService.checkInputNumber(table.getValueAt(row,7).toString())){user.setIsAdmin(Integer.parseInt(table.getValueAt(row,7).toString()));}
+        else user.setIsAdmin(-1);
         return user;
+    }
+
+    private void messageForUserDelete(){
+        String eror = "You cann`t delete your user acount while you are login";
+        JOptionPane.showMessageDialog(jfrm,eror);
     }
 }
 

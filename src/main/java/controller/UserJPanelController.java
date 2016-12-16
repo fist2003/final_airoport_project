@@ -7,6 +7,7 @@ import view.UserJPanelGUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by ПК on 14.12.2016.
@@ -15,6 +16,108 @@ public class UserJPanelController extends UserJPanelGUI {
     public UserJPanelController(){}
 
     public void contrCancelRegisterUserJPanel(JButton cancel){
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                drawUserJPanel();
+            }
+        });
+    }
+
+    public void contrLoginUserJPanel(JButton button, final JTextField loginField, final JPasswordField passwordField){
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final String loginStr = loginField.getText();
+                final String passwordStr = passwordField.getText();
+                Users user = new Users();
+                user.setLogin(loginStr);
+                user.setPassword(passwordStr);
+                boolean[] checklog = instUserService.checkUser(user);
+                if ((checklog[0]) && (checklog[1])) {
+                    if (checklog[2]) {
+                        UsersService.setFlagIsAdmin(true);
+                        setLoginedUser(true);
+                        setUserName(loginStr);
+                        drawJPanel();
+                    } else {
+                        UsersService.setFlagIsAdmin(false);
+                        setLoginedUser(true);
+                        setUserName(loginStr);
+                        drawJPanel();
+                    }
+                } else if (!checklog[0]) {
+                    UsersService.setFlagIsAdmin(false);
+                    setLoginedUser(false);
+                    setInCorrectLogin(true);
+                    drawJPanel();
+
+                } else if (!checklog[1]) {
+                    UsersService.setFlagIsAdmin(false);
+                    setLoginedUser(false);
+                    setInCorrectPassword(true);
+                    drawJPanel();
+                }
+            }
+        });
+    }
+
+    public void contrLogOutUserJPanel(JButton button){
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetAllFlags();
+                drawJPanel();
+            }
+        });
+    }
+
+    public void contrRegisterUserJPanel(JButton button){
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registerUserMenu();
+            }
+        });
+    }
+
+    public void contrConfirmRegisterUserJPanel(JButton ok, final JTextField enterLogin, final JPasswordField enterPassword,
+                                               final JTextField emailTextField, final JTextField enterLastName,
+                                               final JTextField enterFirsName, final JComboBox enterSex){
+        ok.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Users user = new Users(0l,enterLogin.getText(), enterPassword.getText(),emailTextField.getText(),
+                        enterLastName.getText(), enterFirsName.getText(), enterSex.getSelectedItem().toString(),0);
+                ArrayList<String> check = new ArrayList<String>(instUserService.insertNewService(user));
+                if(check.size() == 0){
+                    JOptionPane.showMessageDialog(jfrm, "New user " + enterLogin.getText() + " was created");
+                    UserJPanelGUI.setUserName(user.getLogin());
+                    UserJPanelGUI.setLoginedUser(true);
+                    westJPanel.setVisible(false);
+                    userloginJPanel.setVisible(false);
+                    userloginJPanel.removeAll();
+                    drawUserJPanel();
+                    westJPanel.setVisible(true);
+                }
+                else {messageWrongInputData(check);}
+            }
+        });
+    }
+
+    private void messageSuccessful(){
+            JOptionPane.showMessageDialog(jfrm,"Entered value is correct!");
+        }
+
+    private void messageWrongInputData(ArrayList<String> listAirplanesNames){
+        String eror = "You entered wrong data: ";
+        for(String value : listAirplanesNames) {
+            eror = eror + value + ", ";
+        }
+        eror = eror + ". Please try input correct values";
+        JOptionPane.showMessageDialog(jfrm,eror);
+    }
+ /*   public void contrCancelRegisterUserJPanel(JButton cancel){
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,4 +211,5 @@ public class UserJPanelController extends UserJPanelGUI {
             }
         });
     }
+    */
 }

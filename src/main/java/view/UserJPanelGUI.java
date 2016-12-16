@@ -35,6 +35,8 @@ public class UserJPanelGUI extends WestJPanelGUI{
         userName = name;
     }
 
+    public static String getUserName() {return userName;}
+
     private final Font font = new Font("Verdana", Font.BOLD, 9);
 
     public void resetAllFlags(){
