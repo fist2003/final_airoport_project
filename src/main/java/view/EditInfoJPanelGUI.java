@@ -70,9 +70,8 @@ public class EditInfoJPanelGUI extends EastJPanelGUI {
         JButton insertNewButton = new JButton(insertNewStr);
         JButton editDataButton = new JButton(editDataStr);
         JButton deleteButton = new JButton(deleteDataStr);
-        Dimension buttonDimension = new Dimension(200,50);
         JButton[] arr = {insertNewButton,editDataButton,deleteButton};
-        addPropertiesToTopButtons(arr,buttonDimension);
+        addPropertiesToTopButtons(arr,buttontTopDimension200x50,northBoardJPanel);
         northBoardJPanel.setVisible(true);
         topEastJPanel.add(northBoardJPanel,BorderLayout.NORTH);
         centerBoardJPanel.setVisible(false);
@@ -108,13 +107,8 @@ public class EditInfoJPanelGUI extends EastJPanelGUI {
         JButton passengersButton = new JButton(passengersStr);
         JButton usersButton = new JButton(usersStr);
         JButton[] buttons = {airlinesButton,airplanesButton,flightsButton,passengersButton,usersButton};
-        Dimension buttonDimension = new Dimension(100,30);
-        for (JButton button:buttons) {
-            button.setBackground(backGround);
-            button.setPreferredSize(buttonDimension);
-            button.setFocusable(false);
-            southBoardJPanel.add(button);
-        }
+        addPropertiesToTopButtons(buttons,buttontDimension100x30,southBoardJPanel);
+        for (JButton button:buttons){button.setBackground(backGround);}
         instEditDataJPanelController.chooseTableButtons(airlinesButton,airplanesButton,flightsButton,passengersButton,usersButton,buttons);
         southBoardJPanel.setVisible(true);
     }
@@ -139,12 +133,12 @@ public class EditInfoJPanelGUI extends EastJPanelGUI {
         JTable table = new JTable(data,columns);
         addPropertiesToTable(table);
         table.setBackground(backGround);
-        table.setPreferredSize(new Dimension(850,25));
+        table.setPreferredSize(tableInsertNewDimension850x25);
         table.setShowVerticalLines(true);
         table.setEditingColumn(0);
         bottomEastJPanel.add(table);
         confirmInsertNewDataButton.setBackground(backGround);
-        confirmInsertNewDataButton.setPreferredSize(new Dimension(850,15));
+        confirmInsertNewDataButton.setPreferredSize(buttontInsertNewDimension850x15);
         confirmInsertNewDataButton.setFocusable(false);
         bottomEastJPanel.add(confirmInsertNewDataButton);
         bottomEastJPanel.setVisible(true);

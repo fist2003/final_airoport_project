@@ -30,6 +30,8 @@ public class PricesJPanelGUI extends EastJPanelGUI {
 
     @Override
     public void drawJPanel() {
+        super.drawJPanel();
+        /*
         eastJPanel.setVisible(false);
         eastJPanel.removeAll();
         eastJPanel.setBackground(darkBackGround);
@@ -38,8 +40,8 @@ public class PricesJPanelGUI extends EastJPanelGUI {
         eastJPanel.add(topEastJPanel,BorderLayout.NORTH);
         eastJPanel.add(middleEastJPanel,BorderLayout.CENTER);
         eastJPanel.add(bottomEastJPanel,BorderLayout.SOUTH);
+        */
         drawTopEastJPanel();
-
         drawBottomEastJPanel();
         eastJPanel.setVisible(true);
     }
@@ -58,9 +60,8 @@ public class PricesJPanelGUI extends EastJPanelGUI {
         JButton departFromOdButton = new JButton(departFromOdessaStr);
         JButton arrivalToOdButton = new JButton(arrivalToOdessaStr);
         JButton allPricesButton = new JButton(allPricesStr);
-        Dimension buttonDimension = new Dimension(200,50);
         JButton[] arr = {departFromOdButton,arrivalToOdButton,allPricesButton};
-        addPropertiesToTopButtons(arr,buttonDimension);
+        addPropertiesToTopButtons(arr,buttontTopDimension200x50,northBoardJPanel);
         northBoardJPanel.setVisible(true);
         topEastJPanel.add(northBoardJPanel,BorderLayout.NORTH);
         centerBoardJPanel.setVisible(false);

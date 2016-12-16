@@ -4,6 +4,7 @@ import controller.EastJPanelController;
 import model.Airplanes;
 import model.Users;
 import service.*;
+import view.table_models.CellRenderer;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -39,6 +40,18 @@ public class EastJPanelGUI extends MainPageGUI {
 
     @Override
     public void drawJPanel() {
+        eastJPanel.setVisible(false);
+        eastJPanel.removeAll();
+        eastJPanel.setBackground(darkBackGround);
+        eastJPanel.setPreferredSize(eastJPanelDimension);
+        eastJPanel.setLayout(new BorderLayout());
+        eastJPanel.add(topEastJPanel,BorderLayout.NORTH);
+        eastJPanel.add(middleEastJPanel,BorderLayout.CENTER);
+        eastJPanel.add(bottomEastJPanel,BorderLayout.SOUTH);
+        eastJPanel.setVisible(true);
+    }
+
+    public void drawJPanelStart() {
         ScheduleJPanelGUI instScheduleJPanelGUI = new ScheduleJPanelGUI();
         instScheduleJPanelGUI.drawJPanel();
     }
@@ -88,27 +101,25 @@ public class EastJPanelGUI extends MainPageGUI {
         table.getTableHeader().setDefaultRenderer(renderer);
     }
 
-    protected void addPropertiesToTopButtons(JButton[] arr,Dimension buttonDimension){
+    protected void addPropertiesToTopButtons(JButton[] arr,Dimension buttonDimension,JPanel panel){
         for (JButton button:arr) {
             button.setBackground(darkBackGround);
             button.setPreferredSize(buttonDimension);
             button.setFocusable(false);
-            northBoardJPanel.add(button);
+            panel.add(button);
         }
     }
 
     protected void tuneJLabelsAndAddToJPanel(JLabel[] jLabels) {
-        Font font = new Font("Verdana", Font.BOLD, 11);
         for (JLabel label : jLabels) {
             label.setBackground(darkBackGround);
             label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setFont(font);
+            label.setFont(fontVerdana11Bold);
             southBoardJPanel.add(label);
         }
     }
 
     protected void tuneComboBoxesAndAddToJPanel(JComboBox[] arrComboBox){
-        Font font = new Font("Verdana", Font.BOLD, 11);
         for (JComboBox combo:arrComboBox) {
             combo.setUI(new BasicComboBoxUI() {
                 @Override
@@ -123,23 +134,11 @@ public class EastJPanelGUI extends MainPageGUI {
             });
             ((JLabel)combo.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
             combo.setBackground(darkBackGround);
-            combo.setFont(font);
+            combo.setFont(fontVerdana11Bold);
             combo.setMaximumRowCount(5);
             combo.setAutoscrolls(true);
             combo.setAlignmentX(SwingConstants.CENTER);
             southBoardJPanel.add(combo);
-        }
-    }
-
-    protected void tuneJTextComponents(JTextComponent[] arr){
-        Font font = new Font("Verdana", Font.BOLD, 11);
-        for (JTextComponent jTextComponent:arr){
-            jTextComponent.setBackground(darkBackGround);
-            jTextComponent.setVisible(false);
-            jTextComponent.setCaretColor(Color.yellow);
-            jTextComponent.setForeground(Color.blue);
-            jTextComponent.setFont(font);
-            jTextComponent.setForeground(Color.yellow);
         }
     }
 

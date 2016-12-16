@@ -38,6 +38,9 @@ public class WestJPanelController extends WestJPanelGUI{
                         EditInfoJPanelGUI instEditJPanelGUI = new EditInfoJPanelGUI();
                         instEditJPanelGUI.drawJPanel();
                         break;
+                    case airlinesInfoStr:
+                        AirlinesJPanelGUI instAirlinesJPanelGUI = new AirlinesJPanelGUI();
+                        instAirlinesJPanelGUI.drawJPanel();
                     default:
 
                 }

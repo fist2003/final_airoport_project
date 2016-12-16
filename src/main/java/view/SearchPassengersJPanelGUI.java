@@ -26,14 +26,15 @@ public class SearchPassengersJPanelGUI extends EastJPanelGUI {
     private String searchByFlightInfoStr = "SEARCH BY FLIGHT INFORMATION";
 
     public void drawJPanel() {
-        eastJPanel.setVisible(false);
+        super.drawJPanel();
+       /* eastJPanel.setVisible(false);
         eastJPanel.removeAll();
         eastJPanel.setBackground(darkBackGround);
         eastJPanel.setPreferredSize(eastJPanelDimension);
         eastJPanel.setLayout(new BorderLayout());
         eastJPanel.add(topEastJPanel,BorderLayout.NORTH);
         eastJPanel.add(middleEastJPanel,BorderLayout.CENTER);
-        eastJPanel.add(bottomEastJPanel,BorderLayout.SOUTH);
+        eastJPanel.add(bottomEastJPanel,BorderLayout.SOUTH);*/
         drawTopEastJPanel();
         drawBottomEastJPanel();
         PassengersListTableModel instPassengersListTableModel = new PassengersListTableModel
@@ -54,11 +55,11 @@ public class SearchPassengersJPanelGUI extends EastJPanelGUI {
         northBoardJPanel.setLayout(new GridLayout(1,2,20,0));
         northBoardJPanel.setBackground(backGround);
         northBoardJPanel.setPreferredSize(northBoardJPanelDimension);
-        Dimension buttonDimension = new Dimension(350,50);
+       // Dimension buttonDimension = new Dimension(350,50);
         JButton searchByPersonalInfoButton = new JButton(searchByPersonalInfoStr);
         JButton searchByFlightInfoButton = new JButton(searchByFlightInfoStr);
         JButton[] arr = {searchByPersonalInfoButton,searchByFlightInfoButton};
-        addPropertiesToTopButtons(arr,buttonDimension);
+        addPropertiesToTopButtons(arr,buttontTopDimension350x50,northBoardJPanel);
         northBoardJPanel.setVisible(true);
         topEastJPanel.add(northBoardJPanel,BorderLayout.NORTH);
         centerBoardJPanel.setVisible(false);

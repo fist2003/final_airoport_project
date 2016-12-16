@@ -30,6 +30,8 @@ public class PassengersListJPanelGUI extends EastJPanelGUI {
 
     @Override
     public void drawJPanel() {
+        super.drawJPanel();
+        /*
         eastJPanel.setVisible(false);
         eastJPanel.removeAll();
         eastJPanel.setBackground(darkBackGround);
@@ -41,6 +43,9 @@ public class PassengersListJPanelGUI extends EastJPanelGUI {
         drawTopEastJPanel();
         drawBottomEastJPanel();
         eastJPanel.setVisible(true);
+        */
+        drawTopEastJPanel();
+        drawBottomEastJPanel();
     }
 
     public void drawTopEastJPanel(){
@@ -58,9 +63,8 @@ public class PassengersListJPanelGUI extends EastJPanelGUI {
         JButton allPassengersButton = new JButton(allPassengersStr);
         JButton arrivalFlightsPassengersButton = new JButton(arrivalFlightsPassengersStr);
         JButton departureFlightsPassengersButton = new JButton(departureFlightsPassengersStr);
-        Dimension buttonDimension = new Dimension(200,50);
         JButton[] arr = {allPassengersButton,arrivalFlightsPassengersButton,departureFlightsPassengersButton};
-        addPropertiesToTopButtons(arr,buttonDimension);
+        addPropertiesToTopButtons(arr,buttontTopDimension200x50,northBoardJPanel);
         northBoardJPanel.setVisible(true);
         topEastJPanel.add(northBoardJPanel,BorderLayout.NORTH);
         centerBoardJPanel.setVisible(false);

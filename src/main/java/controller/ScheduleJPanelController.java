@@ -82,30 +82,6 @@ public class ScheduleJPanelController extends ScheduleJPanelGUI {
         });
     }
 
-    public void directionComboBoxSearchController(final JComboBox directionComboBox, final JComboBox flightsComboBox,
-                                                  final JComboBox datesComboBox) {
-        directionComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String[] arrFlights = instScheduleTableSearchService.makeArrForSearchComboBoxByDirection
-                        (directionComboBox.getSelectedItem().toString())[0];
-                flightsComboBox.removeAllItems();
-                for (int i = 0; i < arrFlights.length; i++) {
-                    flightsComboBox.addItem(arrFlights[i]);
-                }
-
-                String[] arrDates = instScheduleTableSearchService.makeArrForSearchComboBoxByDirection
-                        (directionComboBox.getSelectedItem().toString())[1];
-                datesComboBox.removeAllItems();
-                for (int i = 0; i < arrDates.length; i++) {
-                    datesComboBox.addItem(arrDates[i]);
-                }
-
-            }
-        });
-    }
-
     public void dateComboBoxSearchController(final JComboBox directionComboBox, final JComboBox flightsComboBox,
                                                   final JComboBox datesComboBox){
         datesComboBox.addActionListener(new ActionListener() {
@@ -115,7 +91,7 @@ public class ScheduleJPanelController extends ScheduleJPanelGUI {
                     return;
                 }
                 flightsComboBox.removeAllItems();
-               // directionComboBox.removeAllItems();
+                directionComboBox.removeAllItems();
                 String[] arrFlights = instScheduleTableSearchService.makeArrForSearchComboBoxByDate
                         (datesComboBox.getSelectedItem().toString())[0];
                 String[] arrDirections = instScheduleTableSearchService.makeArrForSearchComboBoxByDate

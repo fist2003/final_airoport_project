@@ -47,7 +47,7 @@ public class StartMenuController extends ConnectToMySQLDAO implements GUIInterfa
                     }
                 }
                 if (flagError){
-                    JOptionPane.showMessageDialog(jfrm, "Connection faile, Check your password");
+                    JOptionPane.showMessageDialog(jfrm, "Connection faile, Check your password or Put Start Iformation");
                 }
             }
         });

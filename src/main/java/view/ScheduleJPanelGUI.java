@@ -36,14 +36,15 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
 
     @Override
     public void drawJPanel() {
-        eastJPanel.setVisible(false);
+        super.drawJPanel();
+        /*eastJPanel.setVisible(false);
         eastJPanel.removeAll();
         eastJPanel.setBackground(darkBackGround);
         eastJPanel.setPreferredSize(eastJPanelDimension);
         eastJPanel.setLayout(new BorderLayout());
         eastJPanel.add(topEastJPanel,BorderLayout.NORTH);
         eastJPanel.add(middleEastJPanel,BorderLayout.CENTER);
-        eastJPanel.add(bottomEastJPanel,BorderLayout.SOUTH);
+        eastJPanel.add(bottomEastJPanel,BorderLayout.SOUTH);*/
         drawTopEastJPanel();
         Date curDate = new Date();
         ArrivalTableModel instArrivalTableModel =
@@ -69,9 +70,8 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         JButton arrivalsButton = new JButton(arrivalsStr);
         JButton departuresButton = new JButton(departuresStr);
         JButton searchButton = new JButton(searchStr);
-        Dimension buttonDimension = new Dimension(200,50);
         JButton[] arr = {arrivalsButton,departuresButton,searchButton};
-        addPropertiesToTopButtons(arr,buttonDimension);
+        addPropertiesToTopButtons(arr,buttontTopDimension200x50,northBoardJPanel);
         northBoardJPanel.setVisible(true);
         topEastJPanel.add(northBoardJPanel,BorderLayout.NORTH);
         centerBoardJPanel.setVisible(false);
@@ -100,16 +100,16 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         southBoardJPanel.setLayout(new BorderLayout());
         JPanel topJPanel = new JPanel();
         JPanel bottomJPanel = new JPanel();
-        topJPanel.setPreferredSize(new Dimension(850,25));
-        bottomJPanel.setPreferredSize(new Dimension(850,50));
+        topJPanel.setPreferredSize(panelTopSouthScheduleJpanelDimension850x25);
+        bottomJPanel.setPreferredSize(panelBottomSouthScheduleJpanelDimension850x50);
         topJPanel.setBackground(darkBackGround);
         bottomJPanel.setBackground(red);
         southBoardJPanel.add(topJPanel,BorderLayout.NORTH);
         southBoardJPanel.add(bottomJPanel,BorderLayout.SOUTH);
         topJPanel.setLayout(new BorderLayout());
         JLabel timeFrameLabel = new JLabel("TIME FRAME");
-        timeFrameLabel.setPreferredSize(new Dimension(500,15));
-        timeFrameLabel.setFont(new Font("Verdana", Font.BOLD, 10));
+        timeFrameLabel.setPreferredSize(timeFrameLabelScheduleJpanelDimension500x15);
+        timeFrameLabel.setFont(timeFrameVerdana10Bold);
         JLabel dateJLabel = new JLabel("DATE:");
         dateJLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         dateJLabel.setFont(font);
@@ -138,7 +138,7 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         dateComboBox.setAutoscrolls(true);
         dateComboBox.setAlignmentX(SwingConstants.CENTER);
         jSliderTime = new JSlider(0,24,3);
-        jSliderTime.setPreferredSize(new Dimension(850,45));
+        jSliderTime.setPreferredSize(jsliderScheduleJpanelDimension850x45);
         jSliderTime.setMajorTickSpacing(12);
         jSliderTime.setMinorTickSpacing(3);
         jSliderTime.setPaintTicks(true);
@@ -176,7 +176,7 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         southBoardJPanel.setLayout(new BorderLayout());
         JPanel topJPanel = new JPanel();
         topJPanel.setBackground(darkBackGround);
-        topJPanel.setPreferredSize(new Dimension(850,50));
+        topJPanel.setPreferredSize(panelBottomSouthScheduleJpanelDimension850x50);
         topJPanel.setLayout(new GridLayout(2,2,50,10));
         String[] scheduleStr;
         if(isArrivalsChoosedComboBox) {scheduleStr = new String[]{arrivalsStr, departuresStr};}
@@ -186,7 +186,6 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         JComboBox destinationComboBox = new JComboBox(instScheduleTableSearchService.makeArrOfDestinPortsForSearchComboBox());
         JComboBox flightsComboBox = new JComboBox(instScheduleTableSearchService.makeArrOfFlightsForSearchComboBox());
         JComboBox[] arrComboBox = {dateComboBox,destinationComboBox,scheduleComboBox,flightsComboBox};
-        Font font = new Font("Verdana", Font.BOLD, 10);
         for (JComboBox combo:arrComboBox) {
             combo.setUI(new BasicComboBoxUI() {
                 @Override
@@ -201,7 +200,7 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
             });
             ((JLabel)combo.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
             combo.setBackground(darkBackGround);
-            combo.setFont(font);
+            combo.setFont(timeFrameVerdana10Bold);
             combo.setMaximumRowCount(5);
             combo.setAutoscrolls(true);
             combo.setAlignmentX(SwingConstants.CENTER);
@@ -210,17 +209,16 @@ public class ScheduleJPanelGUI extends EastJPanelGUI {
         southBoardJPanel.add(topJPanel,BorderLayout.NORTH);
         JPanel bottomJPanel = new JPanel();
         bottomJPanel.setBackground(darkBackGround);
-        bottomJPanel.setPreferredSize(new Dimension(850,20));
+        bottomJPanel.setPreferredSize(panelBottomJpanelDimension850x20);
         bottomJPanel.setLayout(new CardLayout());
         JButton searchJButton = new JButton(searchStr);
-        searchJButton.setFont(font);
+        searchJButton.setFont(timeFrameVerdana10Bold);
         searchJButton.setBackground(red);
-        searchJButton.setPreferredSize(new Dimension(200,15));
+        searchJButton.setPreferredSize(buttontSearchDimension200x15);
         bottomJPanel.add(searchJButton,BorderLayout.CENTER);
         southBoardJPanel.add(bottomJPanel,BorderLayout.SOUTH);
         southBoardJPanel.setVisible(true);
         instScheduleJPanelController.scheduleSearcComboBoxController(scheduleComboBox);
-        instScheduleJPanelController.directionComboBoxSearchController(destinationComboBox,flightsComboBox,dateComboBox);
         instScheduleJPanelController.dateComboBoxSearchController(destinationComboBox,flightsComboBox,dateComboBox);
         instScheduleJPanelController.searchButtonSearchMenu(searchJButton,dateComboBox,destinationComboBox,scheduleComboBox,flightsComboBox);
     }

@@ -37,7 +37,7 @@ public class UserJPanelGUI extends WestJPanelGUI{
 
     public static String getUserName() {return userName;}
 
-    private final Font font = new Font("Verdana", Font.BOLD, 9);
+    //private final Font font = new Font("Verdana", Font.BOLD, 9);
 
     public void resetAllFlags(){
         loginedUser = false;
@@ -61,8 +61,8 @@ public class UserJPanelGUI extends WestJPanelGUI{
                 userLabel = new JLabel();
                 userLabel.setText("<html>Welcome " + userName + "!<br> You enterd like Admin.</html>");
                 JButton logOut = new JButton("LogOut");
-                tuneJLabel(userLabel,font,new Dimension(190,50));
-                tuneJButton(logOut,font,new Dimension(90,15));
+                tuneJLabel(userLabel,fontUserVerdana9Bold,new Dimension(190,50));
+                tuneJButton(logOut,fontUserVerdana9Bold,new Dimension(90,15));
                 userloginJPanel.add(userLabel);
                 userloginJPanel.add(logOut);
                 instJPanelController.contrLogOutUserJPanel(logOut);
@@ -70,9 +70,9 @@ public class UserJPanelGUI extends WestJPanelGUI{
             else if(!UsersService.flagIsAdmin) {
                 String str = "Welcome " + userName;
                 userLabel = new JLabel(str);
-                tuneJLabel(userLabel,font,new Dimension(190,50));
+                tuneJLabel(userLabel,fontUserVerdana9Bold,new Dimension(190,50));
                 JButton logOut = new JButton("LogOut");
-                tuneJButton(logOut,font,new Dimension(90,15));
+                tuneJButton(logOut,fontUserVerdana9Bold,new Dimension(90,15));
                 userloginJPanel.add(userLabel);
                 userloginJPanel.add(logOut);
                 instJPanelController.contrLogOutUserJPanel(logOut);
@@ -82,9 +82,9 @@ public class UserJPanelGUI extends WestJPanelGUI{
             userloginJPanel.setLayout(new GridLayout(2, 1, 10, 10));
             String str = "User with this login doesn`t found";
             userLabel = new JLabel(str);
-            tuneJLabel(userLabel,font,new Dimension(190,50));
+            tuneJLabel(userLabel,fontUserVerdana9Bold,new Dimension(190,50));
             JButton tryOther = new JButton("Enter other login");
-            tuneJButton(tryOther,font,new Dimension(90,15));
+            tuneJButton(tryOther,fontUserVerdana9Bold,new Dimension(90,15));
             userloginJPanel.add(userLabel);
             userloginJPanel.add(tryOther);
             instJPanelController.contrLogOutUserJPanel(tryOther);
@@ -93,9 +93,9 @@ public class UserJPanelGUI extends WestJPanelGUI{
             userloginJPanel.setLayout(new GridLayout(2, 1, 10, 10));
             String str = "You enterd incorrect password";
             userLabel = new JLabel(str);
-            tuneJLabel(userLabel,font,new Dimension(190,50));
+            tuneJLabel(userLabel,fontUserVerdana9Bold,new Dimension(190,50));
             JButton tryOther = new JButton("Try other");
-            tuneJButton(tryOther,font,new Dimension(90,15));
+            tuneJButton(tryOther,fontUserVerdana9Bold,new Dimension(90,15));
             userloginJPanel.add(userLabel);
             userloginJPanel.add(tryOther);
             instJPanelController.contrLogOutUserJPanel(tryOther);
@@ -114,9 +114,9 @@ public class UserJPanelGUI extends WestJPanelGUI{
             Dimension dimension = new Dimension(75,15);
             Dimension dimensionButtons = new Dimension(90,15);
             for (int i = 0;i < 2; i++){
-                tuneJButton(jButtons[i],font,dimensionButtons);
-                tuneJTextField(jTextFields[i],font,dimension);
-                tuneJLabel(jLabels[i],font,dimension);
+                tuneJButton(jButtons[i],fontUserVerdana9Bold,dimensionButtons);
+                tuneJTextField(jTextFields[i],fontUserVerdana9Bold,dimension);
+                tuneJLabel(jLabels[i],fontUserVerdana9Bold,dimension);
             }
             userloginJPanel.add(loginLabel);
             userloginJPanel.add(loginEnter);
@@ -155,16 +155,16 @@ public class UserJPanelGUI extends WestJPanelGUI{
 
         Dimension dimension = new Dimension(75,15);
         for (JLabel label : jLabels) {
-            tuneJLabel(label,font,dimension);
+            tuneJLabel(label,fontUserVerdana9Bold,dimension);
         }
         JTextField[] jTextFields = {enterLogin,enterPassword,enterEmail,enterLastName,enterFirsName};
         for (JTextField textField : jTextFields) {
-            tuneJTextField(textField,font,dimension);
+            tuneJTextField(textField,fontUserVerdana9Bold,dimension);
         }
         JButton[] jButtons = {okButton,cancelButton};
         Dimension dimensionButtons = new Dimension(90,15);
         for (JButton jButton : jButtons) {
-            tuneJButton(jButton,font,dimensionButtons);
+            tuneJButton(jButton,fontUserVerdana9Bold,dimensionButtons);
         }
         enterSex.setUI(new BasicComboBoxUI() {
                 @Override
@@ -179,7 +179,7 @@ public class UserJPanelGUI extends WestJPanelGUI{
             });
         ((JLabel)enterSex.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
         enterSex.setBackground(darkBackGround);
-        enterSex.setFont(font);
+        enterSex.setFont(fontUserVerdana9Bold);
         enterSex.setAutoscrolls(true);
         enterSex.setAlignmentX(SwingConstants.CENTER);
         userloginJPanel.add(enterLoginLabel);

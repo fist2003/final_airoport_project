@@ -52,7 +52,6 @@ public class WestJPanelGUI extends MainPageGUI {
         menuJPanel.setBackground(backGround);
         GridLayout gridLayout = new GridLayout(6,1,0,10);
         menuJPanel.setLayout(gridLayout);
-        Dimension buttonDimension = new Dimension(200,45);
         JButton fligthsJButton = new JButton(flightsStr);
         JButton showPricesButton = new JButton(showPricesStr);
         JButton airlinesInfoButton = new JButton(airlinesInfoStr);
@@ -64,7 +63,7 @@ public class WestJPanelGUI extends MainPageGUI {
         for (JButton button:arrOfJButtons) {
             button.setBackground(darkGreyButton);
             button.setForeground(Color.WHITE);
-            button.setPreferredSize(buttonDimension);
+            button.setPreferredSize(buttontTopDimension200x50);
             button.setFocusable(false);
             instWestJPanelController.buttonsController(button);
         }

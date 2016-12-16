@@ -5,9 +5,9 @@ import dao.FlightsDAO;
 import model.Flights;
 
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by ПК on 11.12.2016.
@@ -270,8 +270,8 @@ public class PricesTableService {
     }
 
     public ArrayList<Flights> makePriceTableAll(){
-        ArrayList<Flights> listDeparturePrices = instFlightsDAO.getInfoForAllPriceTableDAO();
-        return listDeparturePrices;
+        ArrayList<Flights> listPrices = instFlightsDAO.getInfoForAllPriceTableDAO();
+        return listPrices;
     }
 
     public String[] makeArrOfDestinPortsFromOdessaForComboBox(){
@@ -330,6 +330,14 @@ public class PricesTableService {
         Set<String> set = new HashSet<>(listDateRange);
         listDateRange.clear();
         listDateRange.addAll(set);
+        Collections.sort(listDateRange, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                Date dateO1 = convertStringToDate(o1);
+                Date date02 = convertStringToDate(o2);
+                return dateO1.getDate()-date02.getDate();
+            }
+        });
         int size = listDateRange.size();
         String[] arrDateRange = new String[size+1];
         arrDateRange[0] = "ALL";
@@ -350,6 +358,14 @@ public class PricesTableService {
         Set<String> set = new HashSet<>(listDateRange);
         listDateRange.clear();
         listDateRange.addAll(set);
+        Collections.sort(listDateRange, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                Date dateO1 = convertStringToDate(o1);
+                Date date02 = convertStringToDate(o2);
+                return dateO1.getDate()-date02.getDate();
+            }
+        });
         int size = listDateRange.size();
         String[] arrDateRange = new String[size+1];
         arrDateRange[0] = "ALL";
@@ -364,25 +380,18 @@ public class PricesTableService {
         int time2int =  time2.getHours()* 3600 + time2.getMinutes() * 60 + time2.getSeconds();
         return (time1int - time2int);
     }
-}
-/*
-    public String[] makeArrDateRangeForComboBox(){
-        ArrayList<Flights> arrAllFlights = instFlightsDAO.getAllDAO();
-        ArrayList<String> listDateRange = new ArrayList<String>();
-        for (Flights flight:arrAllFlights){
-                listDateRange.add(flight.getDateOfDepart());
+
+    private Date convertStringToDate(String value){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(value);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        Set<String> set = new HashSet<>(listDateRange);
-        listDateRange.clear();
-        listDateRange.addAll(set);
-        int size = listDateRange.size();
-        String[] arrDateRange = new String[size+1];
-        arrDateRange[0] = "ALL";
-        for(int i = 0; i < size; i++){
-            arrDateRange[i+1] = listDateRange.get(i);
-        }
-        return arrDateRange;
+        return date;
     }
-*/
+}
+
 
 

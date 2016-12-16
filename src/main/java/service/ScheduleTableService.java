@@ -84,8 +84,8 @@ public class ScheduleTableService {
         ArrayList<Flights> listArrivalFlightsByJSlider = new ArrayList<Flights>();
         Date curDate = new Date();
         Time timeNow = new Time(System.currentTimeMillis());
+        String status = "unknown";
         for (Flights flight : listAllArrivalFlights) {
-            String status = "unknown";
             String currentTimeArrival = " - ";
             String gateName = "";
             Date dateArrive = convertStringToDate(flight.getDateOfArrive());
@@ -133,10 +133,10 @@ public class ScheduleTableService {
     public ArrayList<Flights> makeDepartureScheduleTable(int jSliderValue,ArrayList<Flights> listAllDepartureFlights){
         ArrayList<Flights> listDepartureFlightsByJSlider = new ArrayList<Flights>();
         Date curDate = new Date();
+        String status = "unknown";
         for (Flights flight:listAllDepartureFlights) {
             Date dateDepart = convertStringToDate(flight.getDateOfDepart());
             String timeDepartStr = flight.getTimeOdDepart();
-            String status = "unknown";
             String currentTimeDepart = " - ";
             String gateName = "";
             Time timeDepart = Time.valueOf(timeDepartStr);
@@ -164,7 +164,7 @@ public class ScheduleTableService {
                 gateName = "B1";
                 currentTimeDepart = timeDepartStr;
             }
-            else if (dateDepart.getDate() < curDate.getDate()) {
+            else if (dateDepart.getDate() > curDate.getDate()) {
                 status = "By Schedule";
             }
             flight.setStatusOfFlight(status);
