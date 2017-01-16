@@ -127,7 +127,7 @@ public class ConnectToMySQLDAO {
             st.execute("CREATE TABLE if not exists `Flights` (`id` INT NOT NULL AUTO_INCREMENT,`number` VARCHAR(50) NOT NULL," +
                     "`departPort` VARCHAR(50) NOT NULL,`destinationPort` VARCHAR(50) NOT NULL,`dateDepart` DATE NOT NULL,`dateArrive` DATE NOT NULL," +
                     "`timeDepart` TIME (6) NOT NULL,`timeArrive`  TIME (6) NOT NULL,`priceEconom` INT NOT NULL,`priceBusiness` " +
-                    "INT NOT NULL,`airplane_id` INT NOT NULL, PRIMARY KEY (`id`),UNIQUE INDEX `number_UNIQUE` (`number` ASC));");
+                    "INT NOT NULL,`airplane_id` INT NOT NULL,`status` VARCHAR(50), `gate` VARCHAR (50),`currentTime` TIME(6),PRIMARY KEY (`id`),UNIQUE INDEX `number_UNIQUE` (`number` ASC));");
         }
         catch (SQLException e){
             System.out.println("table flights is already exist");;

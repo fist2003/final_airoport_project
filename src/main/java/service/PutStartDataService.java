@@ -20,7 +20,7 @@ public class PutStartDataService {
         AirlineService instAirlineService = new AirlineService();
         instAirlineService.insertNewService(new Airlines(0l,"AERO JET","Ukraine,Odessa,Odessa International Airport","(+38 048) 777 83 03","www.flyaerojet.aero"));
         instAirlineService.insertNewService(new Airlines(0l,"AZUR AIR","Ukraine,Odessa,Odessa International Airport","(+38 048)  726 27 87","www.uhc.kiev.ua"));
-        instAirlineService.insertNewService(new Airlines(0l,"Turkish Airlines","Ukraine,Odessa, Zhukovskogo str. 26/28","(+38 0482) 34 79 06","www.turkishairlines.com"));
+        instAirlineService.insertNewService(new Airlines(0l,"Turkish Airlines","Ukraine,Odessa, Zhukovskogo str. 26/28","(38 0482) 34 79 06","www.turkishairlines.com"));
     }
 
     private void addAirplanes(){
@@ -97,6 +97,11 @@ public class PutStartDataService {
         instFlightService.insertNewService(new Flights(18l,"ODKA0011","ODESSA","KAIR",date,date,"10:30:00","12:30:00",250,350,6l));
         instFlightService.insertNewService(new Flights(19l,"KAOD0012","KAIR","ODESSA",date,date,"14:30:00","16:30:00",250,350,6l));
         instFlightService.insertNewService(new Flights(20l,"ODKA0012","ODESSA","KAIR",date,date,"18:30:00","20:30:00",250,350,6l));
+
+        instFlightService.insertNewService(new Flights(5l,"ODLV0111","ODESSA","LVIV",date,date,"19:15:00","21:00:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(6l,"LVOD0111","LVIV","ODESSA",date,date,"18:00:00","19:30:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(7l,"ODLV0112","ODESSA","LVIV",date,date,"19:45:00","21:30:00",150,250,2l));
+        instFlightService.insertNewService(new Flights(8l,"LVOD0112","LVIV","ODESSA",date,date,"19:15:00","20:30:00",150,250,2l));
         //2016-12-17
         date = "2016-12-17";
         instFlightService.insertNewService(new Flights(1l,"ODKI0021","ODESSA","KIEV",date,date,"06:00:00","07:30:00",150,250,1l));
