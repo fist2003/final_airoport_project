@@ -35,8 +35,8 @@ public class PutStartDataService {
 
     private void addFlights(){
         FlightService instFlightService = new FlightService();
-        //2016-12-15
-        String date = "2016-12-15";
+        //2017-01-15
+        String date = "2017-01-15";
         instFlightService.insertNewService(new Flights(1l,"ODKI0001","ODESSA","KIEV",date,date,"06:00:00","07:30:00",150,250,1l));
         instFlightService.insertNewService(new Flights(2l,"KIOD0001","KIEV","ODESSA",date,date,"09:30:00","11:00:00",150,250,1l));
         instFlightService.insertNewService(new Flights(3l,"ODKI0002","ODESSA","KIEV",date,date,"13:00:00","14:30:00",150,250,1l));
@@ -66,8 +66,8 @@ public class PutStartDataService {
         instFlightService.insertNewService(new Flights(18l,"ODKA0001","ODESSA","KAIR",date,date,"10:30:00","12:30:00",250,350,6l));
         instFlightService.insertNewService(new Flights(19l,"KAOD0002","KAIR","ODESSA",date,date,"14:30:00","16:30:00",250,350,6l));
         instFlightService.insertNewService(new Flights(20l,"ODKA0002","ODESSA","KAIR",date,date,"18:30:00","20:30:00",250,350,6l));
-//2016-12-15
-        date = "2016-12-16";
+//2017-01-16
+        date = "2017-01-16";
         instFlightService.insertNewService(new Flights(1l,"ODKI0011","ODESSA","KIEV",date,date,"06:00:00","07:30:00",150,250,1l));
         instFlightService.insertNewService(new Flights(2l,"KIOD0011","KIEV","ODESSA",date,date,"09:30:00","11:00:00",150,250,1l));
         instFlightService.insertNewService(new Flights(3l,"ODKI0012","ODESSA","KIEV",date,date,"13:00:00","14:30:00",150,250,1l));
@@ -103,7 +103,7 @@ public class PutStartDataService {
         instFlightService.insertNewService(new Flights(7l,"ODLV0112","ODESSA","LVIV",date,date,"19:45:00","21:30:00",150,250,2l));
         instFlightService.insertNewService(new Flights(8l,"LVOD0112","LVIV","ODESSA",date,date,"19:15:00","20:30:00",150,250,2l));
         //2016-12-17
-        date = "2016-12-17";
+        date = "2017-01-16";
         instFlightService.insertNewService(new Flights(1l,"ODKI0021","ODESSA","KIEV",date,date,"06:00:00","07:30:00",150,250,1l));
         instFlightService.insertNewService(new Flights(2l,"KIOD0021","KIEV","ODESSA",date,date,"09:30:00","11:00:00",150,250,1l));
         instFlightService.insertNewService(new Flights(3l,"ODKI0022","ODESSA","KIEV",date,date,"13:00:00","14:30:00",150,250,1l));
